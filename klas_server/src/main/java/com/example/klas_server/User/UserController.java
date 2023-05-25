@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("/singup")
+    @PostMapping("/signup")
     public ResponseEntity<Void> SignUp(@RequestBody UserSignUpRequest req) {
         try {
             if (req.getStudentId() == null)
@@ -25,5 +25,10 @@ public class UserController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+
+    @PostMapping("/signin")
+    public ResponseEntity<Void> SignIn(@RequestBody UserSignInRequest req) {
+
     }
 }
