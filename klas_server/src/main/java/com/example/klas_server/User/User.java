@@ -1,28 +1,31 @@
 package com.example.klas_server.User;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import org.springframework.util.Assert;
 
-@Entity
-@Builder
-@Getter
-@Table(name = "user")
-@NoArgsConstructor
-@AllArgsConstructor
-public class User {
-    @Id
-    @Column(nullable = false, name = "studentid")
-    private Integer studentId;
+class User {
+    private Long id;
+    private final String name;
+    private final Integer userId;
+    private final String password;
+    private final UserType userType;
 
-    @Column(nullable = false)
-    private String name;
+    public User(final String name, final Integer userId, final String password, final UserType userType) {
+        Assert.hasText(name, "이름은 필수입니다.");
+        Assert.notNull(userId, "id는 필수입니다.");
+        Assert.hasText(password, "비밀번호는 필수입니다.");
+        Assert.notNull(userType, "사용자 유형은 필수입니다.");
 
-    @Column(nullable = false, name = "usertype")
-    private String userType;
+        this.name = name;
+        this.userId = userId;
+        this.password = password;
+        this.userType = userType;
+    }
 
-    @Column(nullable = false)
-    private String password;
+    public void assignId(final Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 }
