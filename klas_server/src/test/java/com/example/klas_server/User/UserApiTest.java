@@ -33,8 +33,8 @@ public class UserApiTest extends ApiTest {
         final String name = "이연걸";
         final Integer userId = 2018202076;
         final String password = "password";
-        final UserType type = UserType.STUDENT;
+        final UserType userType = UserType.STUDENT;
 
-        return new SignUpUserRequest(name, userId, password, type);
+        return new SignUpUserRequest(name, userId, password, userType);
     }
 }

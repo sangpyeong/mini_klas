@@ -1,13 +1,27 @@
 package com.example.klas_server.User;
 
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 
+@Entity
+@Table(name = "users")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private final String name;
-    private final Integer userId;
-    private final String password;
-    private final UserType userType;
+    @Column(nullable = false)
+    private String name;
+    @Column(nullable = false, name = "userid")
+    private Integer userId;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false, name = "usertype")
+    private UserType userType;
 
     public User(final String name, final Integer userId, final String password, final UserType userType) {
         Assert.hasText(name, "이름은 필수입니다.");
@@ -19,13 +33,5 @@ class User {
         this.userId = userId;
         this.password = password;
         this.userType = userType;
-    }
-
-    public void assignId(final Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
     }
 }
