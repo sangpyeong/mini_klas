@@ -27,6 +27,7 @@ dependencies {
     /* database */
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'mysql:mysql-connector-java:8.0.32'
+    implementation 'com.google.guava:guava:32.0.0-jre'
 
     /* server test*/
     testImplementation 'junit:junit:4.13.2'

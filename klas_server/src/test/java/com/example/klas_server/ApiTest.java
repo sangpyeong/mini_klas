@@ -1,14 +1,21 @@
 package com.example.klas_server;
 
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.context.WebServerInitializedEvent;
-import org.springframework.context.event.EventListener;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 public class ApiTest {
-    @EventListener
-    public void onWebInit(WebServerInitializedEvent event) {
-        RestAssured.port = event.getWebServer().getPort();
+    @Autowired
+    private DatabaseCleanup databaseCleanup;
+
+    @BeforeEach
+    void setUp() {
+        if (RestAssured.port == RestAssured.UNDEFINED_PORT) {
+            RestAssured.port = 8080;
+            databaseCleanup.setTableNames();
+        }
+        databaseCleanup.execute();
     }
 }

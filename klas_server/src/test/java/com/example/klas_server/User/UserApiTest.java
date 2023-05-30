@@ -16,17 +16,19 @@ public class UserApiTest extends ApiTest {
     @Test
     void SignUp() {
         final SignUpUserRequest req = getSignUpUserRequest();
+        final ExtractableResponse<Response> response = SignUpRequest(req);
 
-        // API 요청
-        final ExtractableResponse<Response> response =  RestAssured.given().log().all()
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+    }
+
+    private static ExtractableResponse<Response> SignUpRequest(SignUpUserRequest req) {
+        return RestAssured.given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(req)
                 .when()
                 .post("/users")
                 .then()
                 .log().all().extract();
-
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
     }
 
     private static SignUpUserRequest getSignUpUserRequest() {
