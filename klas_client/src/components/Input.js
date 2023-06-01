@@ -6,7 +6,9 @@ function Input({ type, onChange, placeholder }) {
       <input
         class="border-[5px]"
         type={type}
-        onChange={onChange}
+        onChange={(e) => {
+          onChange(e.target.value);
+        }}
         placeholder={placeholder}
       />
     </div>
