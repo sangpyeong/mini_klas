@@ -4,11 +4,20 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Signup from "./pages/User/SignUpPage";
 import SignInPage from "./pages/User/SignInPage";
 import HomePage from "./pages/Home/HomePage";
+import Navigation from "./components/Navigation";
 
 function Router() {
+  const [type, setType] = useState(1); //0은 비회원 1은 학생 2는 교수 3은 관리자
   return (
-    <div class="h-screen">
+    <div class="flex flex-col h-screen">
       <BrowserRouter>
+        {type === 0 ? (
+          <div class="h-[5%] ">
+            <Navigation />
+          </div>
+        ) : (
+          ""
+        )}
         <Routes>
           <Route path="/" element={<SignInPage />} />
           <Route path="/users">
