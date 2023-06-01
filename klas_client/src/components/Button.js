@@ -1,14 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Button({ type, onChange, placeholder }) {
+function Button({ text, onClick }) {
   return (
     <div>
-      <input
-        class="border-[5px]"
-        type={type}
-        onChange={onChange}
-        placeholder={placeholder}
-      />
+      <button class="border-[5px]" onClick={onClick}>
+        {text}
+      </button>
     </div>
   );
 }
