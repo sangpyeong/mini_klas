@@ -10,7 +10,6 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -49,11 +48,9 @@ public class UserApiTest extends ApiTest {
     void SignIn() {
         final var request = 로그인요청_생성();
         final var response = 로그인_요청(request);
-        final var token =  JWT_생성(request);
 
-        assertThat(response.headers().getValue("Authorization")).isNotNull();
         assertThat(response.statusCode()).isEqualTo(HttpStatus.ACCEPTED.value());
-        assertThat(token).isNotNull();
+        assertThat(response.headers().getValue("Authorization")).isNotNull();
     }
 
     private static ExtractableResponse<Response> 회원가입_요청(SignUpUserRequest request) {

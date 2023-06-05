@@ -1,17 +1,20 @@
 package com.example.klas_server.User;
 
 import com.example.klas_server.Exception.DuplicateUserException;
+import com.example.klas_server.Exception.UserIdNotFoundException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 @RequiredArgsConstructor
@@ -34,16 +37,19 @@ public class UserService {
         }
     }
 
-    public void SignIn(final SignInUserRequest req) {
+    public String SignIn(final SignInUserRequest req) {
         try {
-            userRepository.findByUserId(req.userId()).;
-            if (user)
-
-            String token = getJwtToken(req.userId(), userType);
-        } catch () {
-
+            AtomicReference<String> tokenRef = new AtomicReference<>();
+            userRepository.findByUserId(req.userId()).ifPresentOrElse(user -> {
+                tokenRef.set(getJwtToken(user.getUserId(), user.getUserType()));
+            }, () -> {
+                throw new UserIdNotFoundException("사용자 " + req.userId() + "가 존재하지 않습니다.");
+            });
+            return tokenRef.get();
+        } catch (JpaSystemException e) {
+            e.printStackTrace();
         }
-
+        return null;
     }
 
     private static String getJwtToken(Integer userId, UserType userType) {
@@ -59,7 +65,7 @@ public class UserService {
         Date expiryDate = new Date(now.getTime() + expirationTime);
 
         return Jwts.builder()
-                .setSubject(request.userId().toString())
+                .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(key, SignatureAlgorithm.HS512)
