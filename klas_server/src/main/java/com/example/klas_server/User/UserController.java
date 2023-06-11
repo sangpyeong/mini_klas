@@ -2,6 +2,8 @@ package com.example.klas_server.User;
 
 import com.example.klas_server.Exception.DuplicateUserException;
 import com.example.klas_server.Exception.UserIdNotFoundException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -39,5 +41,17 @@ class UserController {
         } catch (JpaSystemException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @GetMapping(value = "/kakao")
+    public ResponseEntity<Void> SignInKakao(@RequestBody final SignInKakaoRequest req, @RequestBody HttpServletResponse res) {
+        userService.KakaoSignIn(req, res);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+//        try {
+//            userService.KakaoSignIn(req, res);
+//            return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+//        } catch (JsonProcessingException e) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//        }
     }
 }

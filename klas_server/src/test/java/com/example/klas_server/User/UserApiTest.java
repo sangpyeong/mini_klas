@@ -40,7 +40,7 @@ public class UserApiTest extends ApiTest {
                 .setSubject(request.userId().toString())
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(key, SignatureAlgorithm.HS512)
+                .signWith(SignatureAlgorithm.HS512, key)
                 .compact();
     }
 
