@@ -12,7 +12,7 @@ import LecturePlanListPage from "./pages/LecturePlan/LecturePlanListPage";
 function Router() {
   const [type, setType] = useContext(UserContext); //0은 비회원 1은 학생 2는 교수 3은 관리자
   return (
-    <div class="flex flex-col h-screen">
+    <div class="flex flex-col h-screen pt-[10px]">
       <BrowserRouter>
         {type !== 0 ? (
           <div class=" ">

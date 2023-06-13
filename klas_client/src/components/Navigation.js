@@ -13,7 +13,7 @@ function Navigation() {
   };
   return (
     <div class="h-full w-full flex flex-col">
-      <div class="h-full w-full flex flex-row justify-between bg-white border-[1px] rounded-[3px]">
+      <div class="h-full w-full flex flex-row justify-between bg-white  rounded-[3px]">
         <Link
           to="/home"
           class="ml-[5%] flex w-[20%] justify-center h-full text-[20px] items-center"
@@ -46,12 +46,21 @@ function Navigation() {
         </div>
       </div>
       {showCategories && (
-        <div class=" absolute w-full flex flex-row bg-white rounded-[3px] border-[1px] mt-[45px] z-[90]">
+        <div
+          class=" absolute w-full flex flex-row bg-white rounded-[3px] border-[1px] mt-[45px] z-[90]"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
           <div class="ml-[5%] flex w-[20%] justify-center h-full text-[20px] items-center"></div>
           <div class="ml-[25%] flex w-[50%] justify-evenly h-full text-[20px] items-center">
             <div class="flex flex-col w-[20%] justify-center "></div>
             <div class="flex flex-col w-[20%] justify-center ">
-              <Link to="">강의계획서</Link>
+              <Link
+                to="/lecture/plan/list"
+                class="rounded-[10px] hover:bg-slate-100"
+              >
+                강의계획서
+              </Link>
               <div>출석체크</div>
               <div>성적</div>
             </div>

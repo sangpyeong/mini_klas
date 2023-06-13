@@ -5,7 +5,7 @@ function Button({ text, onClick }) {
   return (
     <div>
       <button
-        class="w-[100px] border-[5px] rounded-[10px] bg-white"
+        class="w-[100px] border-[1px] rounded-[7px] h-[30px] bg-white items-center flex justify-center "
         onClick={onClick}
       >
         {text}

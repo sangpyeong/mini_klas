@@ -5,7 +5,7 @@ function HomePage() {
   useEffect(() => {}, []);
   return (
     <div class="flex flex-col justify-start items-center  h-screen bg-gradient-to-b from-white to-[#C8D6E8] ">
-      <div class="flex flex-row mt-[3%] border-collapse h-[30%] w-[80%] border-[1px] rounded-[20px]">
+      <div class="flex flex-row mt-[3%] border-collapse h-[30%] w-[60%] border-[1px] rounded-[20px]">
         <table class="w-full border-collapse">
           <thead>
             <tr>
