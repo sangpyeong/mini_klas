@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../contexts/UserContext";
 
 function Navigation() {
   const [showCategories, setShowCategories] = useState(false);
+  const [type, setType] = useContext(UserContext);
   const handleMouseEnter = () => {
     setShowCategories(true);
   };
@@ -13,7 +15,7 @@ function Navigation() {
   };
   return (
     <div class="h-full w-full flex flex-col">
-      <div class="h-full w-full flex flex-row justify-between bg-white  rounded-[3px]">
+      <div class="h-full w-full flex flex-row justify-between bg-white  ">
         <Link
           to="/home"
           class="ml-[5%] flex w-[20%] justify-center h-full text-[20px] items-center"
@@ -43,11 +45,20 @@ function Navigation() {
           <div class="flex w-[50%] justify-center rounded-[20px] hover:bg-slate-100 ">
             MY
           </div>
+          <Link
+            to="/"
+            class="flex w-[20%] text-[12px] justify-center rounded-[20px] hover:bg-slate-100 "
+            onClick={() => {
+              setType(0);
+            }}
+          >
+            Logout
+          </Link>
         </div>
       </div>
       {showCategories && (
         <div
-          class=" absolute w-full flex flex-row bg-white rounded-[3px] border-[1px] mt-[45px] z-[90]"
+          class=" absolute w-full flex flex-row h-[150px] bg-white border-[1px] rounded-[3px]  mt-[45px] z-[90]"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -62,7 +73,9 @@ function Navigation() {
                 강의계획서
               </Link>
               <div>출석체크</div>
-              <div>성적</div>
+              <Link to="/users/grade" class="rounded-[10px] hover:bg-slate-100">
+                성적
+              </Link>
             </div>
             <div class="flex flex-col w-[20%] justify-center ">
               <div>공지</div>

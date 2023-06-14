@@ -1,96 +1,70 @@
 import React, { useEffect, useState } from "react";
+import Table from "../../components/Table";
 
 function HomePage() {
-  const [schedule, setSchedule] = useState([]);
+  const [schedule, setSchedule] = useState([
+    [
+      "1",
+      "소프트웨어공학 (새빛205 / 이기훈)",
+      "컴퓨터활용 (비513 / 정계동)",
+      "인터넷활용 (비513 / 김진수)",
+      "산학협력캡스톤설계1 (새빛102 / 이형근)",
+      "",
+      "",
+    ],
+    [
+      "2",
+      "소프트웨어공학 (새빛205 / 이기훈)",
+      "컴퓨터활용 (비513 / 정계동)",
+      "인터넷활용 (비513 / 김진수)",
+      "산학협력캡스톤설계1 (새빛102 / 이형근)",
+      "",
+      "",
+    ],
+    [
+      "3",
+      "소프트웨어공학 (새빛205 / 이기훈)",
+      "컴퓨터활용 (비513 / 정계동)",
+      "인터넷활용 (비513 / 김진수)",
+      "산학협력캡스톤설계1 (새빛102 / 이형근)",
+      "",
+      "",
+    ],
+    [
+      "4",
+      "소프트웨어공학 (새빛205 / 이기훈)",
+      "컴퓨터활용 (비513 / 정계동)",
+      "인터넷활용 (비513 / 김진수)",
+      "산학협력캡스톤설계1 (새빛102 / 이형근)",
+      "",
+      "",
+    ],
+    [
+      "5",
+      "소프트웨어공학 (새빛205 / 이기훈)",
+      "컴퓨터활용 (비513 / 정계동)",
+      "인터넷활용 (비513 / 김진수)",
+      "산학협력캡스톤설계1 (새빛102 / 이형근)",
+      "",
+      "",
+    ],
+    [
+      "6",
+      "소프트웨어공학 (새빛205 / 이기훈)",
+      "컴퓨터활용 (비513 / 정계동)",
+      "인터넷활용 (비513 / 김진수)",
+      "산학협력캡스톤설계1 (새빛102 / 이형근)",
+      "",
+      "",
+    ],
+  ]);
+  const schedule_header = ["", "월", "화", "수", "목", "금", "토"];
+
   useEffect(() => {}, []);
   return (
-    <div class="flex flex-col justify-start items-center  h-screen bg-gradient-to-b from-white to-[#C8D6E8] ">
-      <div class="flex flex-row mt-[3%] border-collapse h-[30%] w-[60%] border-[1px] rounded-[20px]">
-        <table class="w-full border-collapse">
-          <thead>
-            <tr>
-              <th class="w-[10%] border-r-[1px] border-b-[1px] rounded-[20px]"></th>
-              <th class="w-[15%] border-[1px] rounded-[20px]">월</th>
-              <th class="w-[15%] border-[1px] rounded-[20px]">화</th>
-              <th class="w-[15%] border-[1px] rounded-[20px]">수</th>
-              <th class="w-[15%] border-[1px] rounded-[20px]">목</th>
-              <th class="w-[15%] border-[1px] rounded-[20px]">금</th>
-              <th class="w-[15%] border-l-[1px] border-b-[1px] rounded-[20px]">
-                토
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="w-[10%] border-r-[1px] border-b-[1px] rounded-[20px]">
-                1교시
-              </td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-            </tr>
-            <tr>
-              <td class="w-[10%] border-r-[1px] border-b-[1px] rounded-[20px]">
-                2교시
-              </td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-            </tr>
-            <tr>
-              <td class="w-[10%] border-r-[1px] border-b-[1px] rounded-[20px]">
-                3교시
-              </td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-            </tr>
-            <tr>
-              <td class="w-[10%] border-r-[1px] border-b-[1px] rounded-[20px]">
-                4교시
-              </td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-            </tr>
-            <tr>
-              <td class="w-[10%] border-r-[1px] border-b-[1px] rounded-[20px]">
-                5교시
-              </td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-            </tr>
-            <tr>
-              <td class="w-[10%] border-r-[1px] border-t-[1px] rounded-[20px]">
-                6교시
-              </td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-[1px] rounded-[20px]">1</td>
-              <td class="w-[15%] border-l-[1px] border-t-[1px] rounded-[20px]">
-                1
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div className="flex flex-col justify-start items-center  h-screen bg-gradient-to-b from-white to-[#C8D6E8] ">
+      <div className="flex flex-row mt-[3%] border-collapse h-[35%] text-[15px] w-[60%] ">
+        <Table header={schedule_header} data={schedule} />
       </div>
     </div>
   );
