@@ -9,7 +9,8 @@ export const UserProvider = (props) => {
   const [userId, setUserId] = useState();
   const sessionuserId = localStorage.getItem("userId");
   if (userId) {
-    localStorage.setItem("userId", userId);
+    //localStorage.setItem("userId", userId);
+    console.log("userId");
   }
   else if (sessionuserId) {
     axios
@@ -28,8 +29,8 @@ export const UserProvider = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        localStorage.removeItem("userId");
-        localStorage.removeItem("userType");
+        // localStorage.removeItem("userId");////문제
+        // localStorage.removeItem("userType");
       });
   }
 
