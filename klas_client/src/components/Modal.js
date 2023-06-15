@@ -2,10 +2,18 @@ import { useState, useRef } from "react";
 import KakaoLoginPage from "../pages/User/KakaoLoginPage";
 import { useContext } from "react";
 import { ModalContext } from "../contexts/ModalContext";
+import BoardDetailPage from "../pages/Board/BoardDetailPage";
+import BoardUpdatePage from "../pages/Board/BoardUpdatePage";
 
 function Modal() {
-  const [modalContent, setModalContent] = useState(0);
-  const { modal, setModal } = useContext(ModalContext);
+  const {
+    modal,
+    setModal,
+    modalContent,
+    setModalContent,
+    boardId,
+    setBoardId,
+  } = useContext(ModalContext); //modalContent 0 카카오로그인, 1 게시판
   const ModalBG = useRef();
 
   return (
@@ -20,8 +28,14 @@ function Modal() {
             }
           }}
         >
-          <div className="z-25 w-[30%] h-[40%] bg-white fixed  ">
-            {modalContent === 0 ? <KakaoLoginPage setModal={setModal} /> : null}
+          <div className="z-25 w-[40%] h-[50%] bg-white fixed">
+            {modalContent === 0 ? (
+              <KakaoLoginPage setModal={setModal} />
+            ) : modalContent === 1 ? (
+              <BoardDetailPage />
+            ) : modalContent === 2 ? (
+              <BoardUpdatePage />
+            ) : null}
           </div>
         </div>
       ) : null}

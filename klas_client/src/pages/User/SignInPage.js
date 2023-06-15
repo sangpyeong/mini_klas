@@ -12,7 +12,14 @@ import { ModalContext } from "../../contexts/ModalContext";
 function SignInPage() {
   const [password, setPaaword] = useState("");
   const { userId, setUserId, userType, setUserType } = useContext(UserContext);
-  const { modal, setModal } = useContext(ModalContext);
+  const {
+    modal,
+    setModal,
+    modalContent,
+    setModalContent,
+    boardId,
+    setBoardId,
+  } = useContext(ModalContext);
   const [type, setType] = useState(0);
   const radioRef = useRef();
   const navigate = useNavigate();
@@ -78,6 +85,7 @@ function SignInPage() {
         <button
           onClick={() => {
             setModal(true);
+            setModalContent(0);
           }}
           class="w-[100px] border-[3px] rounded-[7px] h-[30px] bg-yellow-200 items-center flex justify-center text-center transition-all duration-200 hover:bg-slate-300"
         >

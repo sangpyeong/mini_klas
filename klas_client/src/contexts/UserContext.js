@@ -9,11 +9,9 @@ export const UserProvider = (props) => {
   const [userId, setUserId] = useState();
   const sessionuserId = localStorage.getItem("userId");
   const sessionuserType = localStorage.getItem("userType");
-  
-  if(!userId &&sessionuserId)
-    setUserId(sessionuserId);
-  if(!userType && sessionuserType)
-    setUserType(sessionuserType);
+
+  if (!userId && sessionuserId) setUserId(sessionuserId);
+  if (!userType && sessionuserType) setUserType(sessionuserType);
 
   return (
     <UserContext.Provider value={{ userType, setUserType, userId, setUserId }}>

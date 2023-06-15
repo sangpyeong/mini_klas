@@ -7,16 +7,60 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import BoardDetailPage from "./BoardDetailPage";
 import { ModalContext } from "../../contexts/ModalContext";
+import { useEffect } from "react";
 
 function BoardPage() {
-  const header = [];
-  const data = [];
+  const [data, setData] = useState([
+    {
+      id: 1,
+      title: "교수님 죄송합니다.",
+      content: "근데 교수님도 저한테 죄송하지 않으세요?",
+      user: { userId: "2018202086" },
+    },
+    {
+      id: 2,
+      title: "교수님 죄송합니다.",
+      content: "근데 교수님도 저한테 죄송하지 않으세요?",
+      user: { userId: "2018202000" },
+    },
+    {
+      id: 3,
+      title: "교수님 죄송합니다.",
+      content: "근데 교수님도 저한테 죄송하지 않으세요?",
+      user: { userId: "2018202000" },
+    },
+    {
+      id: 4,
+      title: "교수님 죄송합니다.",
+      content: "근데 교수님도 저한테 죄송하지 않으세요?",
+      user: { userId: "2018202000" },
+    },
+  ]);
   const { userId } = useContext(UserContext);
-  const { modal, setModal } = useContext(ModalContext);
+  const {
+    modal,
+    setModal,
+    modalContent,
+    setModalContent,
+    boardId,
+    setBoardId,
+  } = useContext(ModalContext);
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
+  const sessionUserID = localStorage.getItem("userId");
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/board/list")
+      .then((res) => {
+        console.log(res);
+        setData(res);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  }, []);
   const handleToggleForm = () => {
     setShowForm(!showForm);
   };
@@ -24,7 +68,9 @@ function BoardPage() {
   const handledetail = (e) => {
     const key = e.target.getAttribute("id");
     console.log(key);
+    setBoardId(key);
     setModal(true);
+    setModalContent(1);
   };
   return (
     <div className="flex flex-col justify-evenly w-full items-center  h-screen bg-gradient-to-b from-white to-[#C8D6E8] overflow-y-auto">
@@ -84,46 +130,26 @@ function BoardPage() {
       )}
 
       <div className="flex flex-col  w-[60%]  border-[2px] border-gray-400 bg-white rounded-[10px] overflow-yscroll">
-        <div
-          className="flex flex-col w-full pl-4  h-[150px] justify-evenly hover:bg-slate-200 duration-100"
-          onClick={handledetail}
-          id="1"
-        >
-          <div className="font-bold text-[20px]" id="1">
-            교수님 죄송합니다.
+        {data.map((board) => (
+          <div>
+            <div
+              className="flex flex-col w-full pl-4  h-[150px] justify-evenly hover:bg-slate-200 duration-100"
+              onClick={handledetail}
+              id={board.id}
+            >
+              <div className="font-bold text-[20px]" id={board.id}>
+                {board.title}
+              </div>
+              <div className=" text-[15px] " id={board.id}>
+                {board.content}
+              </div>
+              <div id={board.id}>
+                {board.user.userId === sessionUserID ? sessionUserID : "익명"}
+              </div>
+            </div>
+            <div className="flex border-[1px] border-gray-400"></div>
           </div>
-          <div className=" text-[15px] " id="1">
-            근데 교수님도 저한테 죄송하지 않으세요?
-          </div>
-          <div id="1">익명</div>
-        </div>
-        <div className="flex border-[1px] border-gray-400"></div>
-        <div
-          className="flex flex-col w-full pl-4  h-[150px] justify-evenly hover:bg-slate-200 duration-100"
-          onClick={handledetail}
-        >
-          <div className="font-bold text-[20px]">교수님 죄송합니다.</div>
-          <div className=" text-[15px] ">
-            근데 교수님도 저한테 죄송하지 않으세요?
-          </div>
-          <div>익명</div>
-        </div>
-        <div className="flex border-[1px] border-gray-400"></div>
-        <div className="flex flex-col w-full pl-4  h-[150px] justify-evenly hover:bg-slate-200 duration-100">
-          <div className="font-bold text-[20px]">교수님 죄송합니다.</div>
-          <div className=" text-[15px] ">
-            근데 교수님도 저한테 죄송하지 않으세요?
-          </div>
-          <div>익명</div>
-        </div>
-        <div className="flex border-[1px] border-gray-400"></div>
-        <div className="flex flex-col w-full pl-4  h-[150px] justify-evenly hover:bg-slate-200 duration-100">
-          <div className="font-bold text-[20px]">교수님 죄송합니다.</div>
-          <div className=" text-[15px] ">
-            근데 교수님도 저한테 죄송하지 않으세요?
-          </div>
-          <div>익명</div>
-        </div>
+        ))}
       </div>
     </div>
   );
