@@ -35,6 +35,24 @@ function BoardPage() {
       content: "근데 교수님도 저한테 죄송하지 않으세요?",
       user: { userId: "2018202000" },
     },
+    {
+      id: 5,
+      title: "교수님 죄송합니다.",
+      content: "근데 교수님도 저한테 죄송하지 않으세요?",
+      user: { userId: "2018202000" },
+    },
+    {
+      id: 6,
+      title: "교수님 죄송합니다.",
+      content: "근데 교수님도 저한테 죄송하지 않으세요?",
+      user: { userId: "2018202000" },
+    },
+    {
+      id: 7,
+      title: "교수님 죄송합니다.",
+      content: "근데 교수님도 저한테 죄송하지 않으세요?",
+      user: { userId: "2018202000" },
+    },
   ]);
   const { userId } = useContext(UserContext);
   const {
@@ -129,9 +147,9 @@ function BoardPage() {
         </div>
       )}
 
-      <div className="flex flex-col  w-[60%]  border-[2px] border-gray-400 bg-white rounded-[10px] overflow-yscroll">
+      <div className="flex flex-col  w-[60%] h-[70%]  border-[2px] border-gray-400 bg-white rounded-[10px] overflow-y-auto">
         {data.map((board) => (
-          <div>
+          <div className=" inline-block">
             <div
               className="flex flex-col w-full pl-4  h-[150px] justify-evenly hover:bg-slate-200 duration-100"
               onClick={handledetail}
