@@ -5,7 +5,7 @@ import { UserContext } from "../contexts/UserContext";
 
 function Navigation() {
   const [showCategories, setShowCategories] = useState(false);
-  const [type, setType] = useContext(UserContext);
+  const { userTpye, setUserType } = useContext(UserContext);
   const handleMouseEnter = () => {
     setShowCategories(true);
   };
@@ -49,7 +49,7 @@ function Navigation() {
             to="/"
             class="flex w-[20%] text-[12px] justify-center rounded-[20px] hover:bg-slate-100 "
             onClick={() => {
-              setType(0);
+              setUserType(0);
             }}
           >
             Logout

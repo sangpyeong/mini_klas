@@ -21,13 +21,17 @@ function SignUpPage() {
         <div class="flex flex-row">
           <label>학생</label>
           <input
+            name="type"
             type="radio"
+            value="option1"
             onClick={() => {
               setUserType("1");
             }}
           />
           <label>교수</label>
           <input
+            name="type"
+            value="option2"
             type="radio"
             onClick={() => {
               setUserType("2");
@@ -35,6 +39,8 @@ function SignUpPage() {
           />
           <label>관리자</label>
           <input
+            name="type"
+            value="option3"
             type="radio"
             onClick={() => {
               setUserType("3");
@@ -65,7 +71,7 @@ function SignUpPage() {
                   console.log(err.response);
                 });
             }}
-          />{" "}
+          />
         </div>
       </div>
     </div>
