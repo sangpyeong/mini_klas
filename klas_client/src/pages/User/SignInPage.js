@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useRef } from "react";
+import { ImBubbles3 } from "react-icons/im";
 
 
 function SignInPage({ modal, setModal }) {
@@ -13,6 +14,7 @@ function SignInPage({ modal, setModal }) {
   const { userId, setUserId, userType, setUserType } = useContext(UserContext);
   const [type, setType] = useState(0);
   const radioRef = useRef();
+  const navigate = useNavigate();
   
   const handleSubmit = (e) => {
     e.preventDefault(); 
@@ -33,8 +35,9 @@ function SignInPage({ modal, setModal }) {
       console.log(res);
       console.log("render");
       localStorage.setItem("userId", userId);
-      localStorage.setItem("userType", res.data.type-1);
-      setUserType(res.data.type-1);
+      localStorage.setItem("userType", res.data+1);
+      setUserType(res.data+1);
+      navigate("/home");
       
     })
     .catch((err) => {
@@ -57,7 +60,7 @@ function SignInPage({ modal, setModal }) {
         <div class="flex justify-center flex-row mt-2">
           <Button type="submit"
             text="로그인"
-          /> 
+          />
           <Link to="/users/signup">
             <Button text="회원가입" />
           </Link>
@@ -75,12 +78,15 @@ function SignInPage({ modal, setModal }) {
             }}
           />
         </Link>
-        <Button
-          text="카카오"
+        <button
           onClick={() => {
             setModal(true);
           }}
-        />
+          class="w-[100px] border-[3px] rounded-[7px] h-[30px] bg-yellow-200 items-center flex justify-center text-center transition-all duration-200 hover:bg-slate-300"
+        >
+          <ImBubbles3 />
+          카카오
+        </button>
       </div>
     </div>
   );

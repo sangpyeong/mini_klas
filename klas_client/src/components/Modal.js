@@ -18,7 +18,7 @@ function Modal({ modal, setModal }) {
           }}
         >
           <div className="z-25 w-[30%] h-[40%] bg-white fixed  ">
-            {modalContent === 0 ? <KakaoLoginPage /> : null}
+            {modalContent === 0 ? <KakaoLoginPage setModal={setModal} /> : null}
           </div>
         </div>
       ) : null}

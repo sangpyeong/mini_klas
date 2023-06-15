@@ -10,20 +10,25 @@ export const UserProvider = (props) => {
   const sessionuserId = localStorage.getItem("userId");
   if (userId) {
     //localStorage.setItem("userId", userId);
-    console.log("userId");
+    
   }
   else if (sessionuserId) {
     axios
       .post("http://localhost:8080/users/me", 
-       {params:{ userId: sessionuserId }},
+       { userId: sessionuserId },
       )
       .then((result) => {
+        console.log(result + "hihi");
         setUserId(sessionuserId);
-        if(result===0)
+        if(result==0){
+          console.log("hihi");
           setUserType(1);
-        else if(result===1)
+        }
+        else if(result==1){
           setUserType(2);
-        else if(result===2)
+          console.log("hihi22");
+        }
+        else if(result==2)
           setUserType(0);
         console.log(userType);
       })
