@@ -7,64 +7,61 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useRef } from "react";
 import { ImBubbles3 } from "react-icons/im";
+import { ModalContext } from "../../contexts/ModalContext";
 
-
-function SignInPage({ modal, setModal }) {
+function SignInPage() {
   const [password, setPaaword] = useState("");
   const { userId, setUserId, userType, setUserType } = useContext(UserContext);
+  const { modal, setModal } = useContext(ModalContext);
   const [type, setType] = useState(0);
   const radioRef = useRef();
   const navigate = useNavigate();
-  
+
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     axios
-    .post("http://localhost:8080/users", 
-    {
-        userId: userId,
-        password: password,
-    }
-      ,
-      {
-        headers: {
-          "Content-type": "application/json",
+      .post(
+        "http://localhost:8080/users",
+        {
+          userId: userId,
+          password: password,
         },
-      }
-    )
-    .then((res) => {
-      console.log(res);
-      console.log("render");
-      localStorage.setItem("userId", userId);
-      localStorage.setItem("userType", res.data+1);
-      setUserType(res.data+1);
-      navigate("/home");
-      
-    })
-    .catch((err) => {
-      console.log(err.response);
-    });
-    
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        console.log("render");
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("userType", res.data + 1);
+        setUserType(res.data + 1);
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
   };
   return (
     <div class="flex flex-col justify-center items-center  h-screen bg-gradient-to-b from-white to-[#C8D6E8]">
       <div class="flex justify-center flex-col items-center h-[50%] w-[50%]  rounded-[100px]">
         <div class="text-[100px]">mini-klas</div>
         <form onSubmit={handleSubmit}>
-        <div>
-          <Input type="text" onChange={setUserId} placeholder="학번" />
-        </div>
-        <div class="mt-1">
-          <Input type="text" onChange={setPaaword} placeholder="비밀번호" />
-        </div>
+          <div>
+            <Input type="text" onChange={setUserId} placeholder="학번" />
+          </div>
+          <div class="mt-1">
+            <Input type="text" onChange={setPaaword} placeholder="비밀번호" />
+          </div>
 
-        <div class="flex justify-center flex-row mt-2">
-          <Button type="submit"
-            text="로그인"
-          />
-          <Link to="/users/signup">
-            <Button text="회원가입" />
-          </Link>
-        </div>
+          <div class="flex justify-center flex-row mt-2">
+            <Button type="submit" text="로그인" />
+            <Link to="/users/signup">
+              <Button text="회원가입" />
+            </Link>
+          </div>
         </form>
 
         <Link to="/home">

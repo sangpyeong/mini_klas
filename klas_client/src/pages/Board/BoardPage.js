@@ -5,16 +5,26 @@ import Button from "../../components/Button";
 import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import BoardDetailPage from "./BoardDetailPage";
+import { ModalContext } from "../../contexts/ModalContext";
 
 function BoardPage() {
   const header = [];
   const data = [];
   const { userId } = useContext(UserContext);
+  const { modal, setModal } = useContext(ModalContext);
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
+
   const handleToggleForm = () => {
-    setShowForm(!showForm); // 폼의 표시 여부를 반전시킴
+    setShowForm(!showForm);
+  };
+
+  const handledetail = (e) => {
+    const key = e.target.getAttribute("id");
+    console.log(key);
+    setModal(true);
   };
   return (
     <div className="flex flex-col justify-evenly w-full items-center  h-screen bg-gradient-to-b from-white to-[#C8D6E8] overflow-y-auto">
@@ -30,20 +40,21 @@ function BoardPage() {
           <BsFillPencilFill size="20" className="mr-4" />
         </div>
       ) : (
-        <div className="flex flex-col text-[15px]  w-[60%] h-[300px] border-[2px] items-center justify-between bg-white rounded-[10px">
+        <div className="flex flex-col text-[15px]  w-[60%] h-[150px] border-[2px] items-center justify-between bg-white rounded-[10px">
           <input
             type="text"
             placeholder="글 제목"
             className="flex w-full border-[1px] h-[20%] pl-3"
+            id="title"
             onchange={(e) => {
               setTitle(e.target.value);
             }}
           />
-
           <textarea
             type="text"
             placeholder="글 내용"
             className="flex w-full border-[1px] h-[80%] pl-3"
+            id="content"
             onchange={(e) => {
               setContent(e.target.value);
             }}
@@ -55,7 +66,7 @@ function BoardPage() {
               onClick={() => {
                 axios
                   .post("http://localhost:8080/board/write", {
-                    userId: userId,
+                    user: { userId: userId },
                     title: title,
                     content: content,
                   })
@@ -73,15 +84,24 @@ function BoardPage() {
       )}
 
       <div className="flex flex-col  w-[60%]  border-[2px] border-gray-400 bg-white rounded-[10px] overflow-yscroll">
-        <div className="flex flex-col w-full pl-4  h-[150px] justify-evenly hover:bg-slate-200 duration-100">
-          <div className="font-bold text-[20px]">교수님 죄송합니다.</div>
-          <div className=" text-[15px] ">
+        <div
+          className="flex flex-col w-full pl-4  h-[150px] justify-evenly hover:bg-slate-200 duration-100"
+          onClick={handledetail}
+          id="1"
+        >
+          <div className="font-bold text-[20px]" id="1">
+            교수님 죄송합니다.
+          </div>
+          <div className=" text-[15px] " id="1">
             근데 교수님도 저한테 죄송하지 않으세요?
           </div>
-          <div>익명</div>
+          <div id="1">익명</div>
         </div>
         <div className="flex border-[1px] border-gray-400"></div>
-        <div className="flex flex-col w-full pl-4  h-[150px] justify-evenly hover:bg-slate-200 duration-100">
+        <div
+          className="flex flex-col w-full pl-4  h-[150px] justify-evenly hover:bg-slate-200 duration-100"
+          onClick={handledetail}
+        >
           <div className="font-bold text-[20px]">교수님 죄송합니다.</div>
           <div className=" text-[15px] ">
             근데 교수님도 저한테 죄송하지 않으세요?

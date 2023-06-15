@@ -1,8 +1,11 @@
 import { useState, useRef } from "react";
 import KakaoLoginPage from "../pages/User/KakaoLoginPage";
+import { useContext } from "react";
+import { ModalContext } from "../contexts/ModalContext";
 
-function Modal({ modal, setModal }) {
+function Modal() {
   const [modalContent, setModalContent] = useState(0);
+  const { modal, setModal } = useContext(ModalContext);
   const ModalBG = useRef();
 
   return (

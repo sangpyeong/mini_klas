@@ -15,10 +15,11 @@ import CallbackPage from "./pages/User/CallbackPage";
 import RegisterPage from "./pages/Register/RegisterPage";
 import MyPage from "./pages/My/MyPage";
 import BoardPage from "./pages/Board/BoardPage";
+import { ModalContext } from "./contexts/ModalContext";
 
 function Router() {
   const { userType, setUserType } = useContext(UserContext); //0은 비회원 1은 학생 2는 교수 3은 관리자
-  const [modal, setModal] = useState(false);
+  const { modal, setModal } = useContext(ModalContext);
   return (
     <div class="flex flex-col h-screen pt-[10px]">
       <BrowserRouter>
@@ -29,12 +30,9 @@ function Router() {
         ) : (
           ""
         )}
-        <Modal modal={modal} setModal={setModal} />
+        <Modal />
         <Routes>
-          <Route
-            path="/"
-            element={<SignInPage modal={modal} setModal={setModal} />}
-          />
+          <Route path="/" element={<SignInPage />} />
           <Route path="/users">
             <Route path="grade" element={<GradePage />} />
             <Route
