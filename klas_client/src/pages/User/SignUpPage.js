@@ -3,12 +3,13 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 function SignUpPage() {
   const [name, setName] = useState("");
-  const [userId, setUserId] = useState();
+  const { userId, setUserId, userType, setUserType } = useContext(UserContext);
   const [password, setPaaword] = useState("");
-  const [userType, setUserType] = useState("");
 
   return (
     <div class="flex flex-col justify-center items-center  h-screen bg-gradient-to-b from-white to-[#C8D6E8] ">

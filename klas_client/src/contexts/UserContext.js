@@ -7,13 +7,24 @@ export const UserContext = createContext();
 export const UserProvider = (props) => {
   const [userType, setUserType] = useState(0); // 초기 userType 설정
   const [userId, setUserId] = useState();
-  // const sessionuserId = localStorage.getItem("userId");
-  // if (userId) {
-  //   localStorage.setItem("userId", userId);
-  // } else if (sessionuserId) {
-  //   axios.get("http://localhost:8080/users/me", {
-  //     headers: { sessionid: sessionuserId },
-  //   });
+  const sessionuserId = localStorage.getItem("userId");
+  if (userId) {
+    localStorage.setItem("userId", userId);
+  }
+  //else if (sessionuserId) {
+  //   axios
+  //     .get("http://localhost:8080/users/me", {
+  //       headers: { userId: sessionuserId },
+  //     })
+  //     .then((result) => {
+  //       setUserId(sessionuserId);
+  //       setUserType(result.userType);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       localStorage.removeItem("userId");
+  //       localStorage.removeItem("userType");
+  //     });
   // }
 
   return (

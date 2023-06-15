@@ -28,9 +28,13 @@ function Navigation() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div class="flex w-[20%] justify-center rounded-[20px] hover:bg-slate-100 ">
-            수강신청
-          </div>
+          <Link
+            to="/register"
+            class="flex w-[20%] justify-center rounded-[20px] hover:bg-slate-100 "
+          >
+            <div>수강신청</div>
+          </Link>
+
           <div class="flex w-[20%] justify-center rounded-[20px] hover:bg-slate-100 ">
             수강관리
           </div>

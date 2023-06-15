@@ -8,9 +8,8 @@ import { UserContext } from "../../contexts/UserContext";
 import { useRef } from "react";
 
 function SignInPage({ modal, setModal }) {
-  const [userId, setUserId] = useState("");
   const [password, setPaaword] = useState("");
-  const { userType, setUserType } = useContext(UserContext);
+  const { userId, setUserId, userType, setUserType } = useContext(UserContext);
   const [type, setType] = useState(0);
   const radioRef = useRef();
   return (

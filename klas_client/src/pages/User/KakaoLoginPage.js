@@ -6,7 +6,8 @@ import Button from "../../components/Button";
 import Input from "../../components/Input";
 
 function KakaoLoginPage() {
-  const { userType, setUserType, userId, setUserId } = useContext(UserContext);
+  const { userId, setUserId } = useContext(UserContext);
+  console.log(userId);
   return (
     <div className="flex flex-col justify-center text-[15px] items-center h-full w-full">
       <div className="text-[20px]">카카오로그인</div>
