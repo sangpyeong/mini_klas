@@ -102,7 +102,7 @@ function LecturePlanListPage() {
   };
 
   return (
-    <div class="flex flex-col justify-center items-center h-screen border bg-gradient-to-b from-white to-[#C8D6E8]">
+    <div class="flex flex-col justify-center items-center h-screen  bg-gradient-to-b from-white to-[#C8D6E8]">
       <div class="flex justify-center flex-col items-center h-[70%] w-[70%] ">
         <div class="flex justify-start w-full  mb-4">강의계획서 조회</div>
 

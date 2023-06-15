@@ -41,19 +41,28 @@ function Navigation() {
           <div class="flex w-[20%] justify-center rounded-[20px] hover:bg-slate-100 ">
             학습관리
           </div>
-          <div class="flex w-[20%] justify-center rounded-[20px] hover:bg-slate-100 ">
-            게시판
-          </div>
+          <Link
+            to="/board"
+            class="flex w-[20%] justify-center rounded-[20px] hover:bg-slate-100 "
+          >
+            <div>게시판</div>
+          </Link>
         </div>
         <div class="mr-[5%] flex w-[20%] justify-center h-full text-[20px] items-center ">
-          <div class="flex w-[50%] justify-center rounded-[20px] hover:bg-slate-100 ">
-            MY
-          </div>
+          <Link
+            to="/my"
+            class="flex w-[50%] justify-center rounded-[20px] hover:bg-slate-100 "
+          >
+            <div>MY</div>
+          </Link>
+
           <Link
             to="/"
             class="flex w-[20%] text-[12px] justify-center rounded-[20px] hover:bg-slate-100 "
             onClick={() => {
               setUserType(0);
+              localStorage.removeItem("userId");
+              localStorage.removeItem("userType");
             }}
           >
             Logout

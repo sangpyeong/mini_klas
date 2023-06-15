@@ -103,7 +103,7 @@ function LectureRegisterPage() {
   };
 
   return (
-    <div class="flex flex-col justify-center items-center h-screen border bg-gradient-to-b from-white to-[#C8D6E8]">
+    <div class="flex flex-col justify-center items-center h-screen  bg-gradient-to-b from-white to-[#C8D6E8]">
       <div class="flex justify-center flex-col items-center h-[600px] w-[1400px] border border-black ">
         <div class="flex justify-start  w-[90%] h-[10%] mt-4">강의 조회</div>
 

@@ -22,33 +22,12 @@ function SignInPage({ modal, setModal }) {
         <div class="mt-1">
           <Input type="text" onChange={setPaaword} placeholder="비밀번호" />
         </div>
-        <div className="flex">
-          {" "}
-          <label>학생</label>
-          <input
-            name="type"
-            type="radio"
-            value="option1"
-            ref={radioRef}
-            onChange={() => {
-              setType("1");
-            }}
-          />
-          <label>교수</label>
-          <input
-            name="type"
-            value="option2"
-            type="radio"
-            onChange={() => {
-              setType("2");
-            }}
-          />
-        </div>
 
         <div class="flex justify-center flex-row mt-2">
           <Button
             text="로그인"
             onClick={() => {
+              console.log(userId, password);
               axios
                 .post("http://localhost:8080/users/signin", {
                   params: {
@@ -77,6 +56,7 @@ function SignInPage({ modal, setModal }) {
             text="test"
             onClick={() => {
               setUserType(1);
+              setUserId(2018202086);
               localStorage.setItem("userType", 1);
               localStorage.setItem("userId", 2018202086);
             }}
