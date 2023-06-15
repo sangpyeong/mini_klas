@@ -13,6 +13,8 @@ import GradePage from "./pages/User/GradePage";
 import Modal from "./components/Modal";
 import CallbackPage from "./pages/User/CallbackPage";
 import RegisterPage from "./pages/Register/RegisterPage";
+import MyPage from "./pages/My/MyPage";
+import BoardPage from "./pages/Board/BoardPage";
 
 function Router() {
   const { userType, setUserType } = useContext(UserContext); //0은 비회원 1은 학생 2는 교수 3은 관리자
@@ -43,6 +45,8 @@ function Router() {
             <Route path="callback" element={<CallbackPage />} />
           </Route>
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/my" element={<MyPage />} />
+          <Route path="/board" element={<BoardPage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/lecture/plan">
             <Route path="list" element={<LecturePlanListPage />} />
