@@ -1,4 +1,4 @@
-gpackage com.example.klas_server;
+package com.example.klas_server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
