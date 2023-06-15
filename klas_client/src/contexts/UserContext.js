@@ -11,21 +11,27 @@ export const UserProvider = (props) => {
   if (userId) {
     localStorage.setItem("userId", userId);
   }
-  //else if (sessionuserId) {
-  //   axios
-  //     .get("http://localhost:8080/users/me", {
-  //       headers: { userId: sessionuserId },
-  //     })
-  //     .then((result) => {
-  //       setUserId(sessionuserId);
-  //       setUserType(result.userType);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       localStorage.removeItem("userId");
-  //       localStorage.removeItem("userType");
-  //     });
-  // }
+  else if (sessionuserId) {
+    axios
+      .post("http://localhost:8080/users/me", 
+       {params:{ userId: sessionuserId }},
+      )
+      .then((result) => {
+        setUserId(sessionuserId);
+        if(result===0)
+          setUserType(1);
+        else if(result===1)
+          setUserType(2);
+        else if(result===2)
+          setUserType(0);
+        console.log(userType);
+      })
+      .catch((err) => {
+        console.log(err);
+        localStorage.removeItem("userId");
+        localStorage.removeItem("userType");
+      });
+  }
 
   return (
     <UserContext.Provider value={{ userType, setUserType, userId, setUserId }}>

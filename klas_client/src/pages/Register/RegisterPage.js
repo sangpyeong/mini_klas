@@ -24,7 +24,9 @@ function LectureRegisterPage() {
         lectureDTO: { id: "1" },
       })
       .then((res) => {
-        res.status == "416"
+        res.status == "417"
+          ? setOutput("이미 수강신청한 과목입니다.")
+          : res.status == "416"
           ? setOutput("수강인원 초과입니다.")
           : res.status == "200"
           ? setOutput("수강신청 되었습니다.")

@@ -49,13 +49,23 @@ function SignInPage({ modal, setModal }) {
           <Button
             text="로그인"
             onClick={() => {
+              console.log(userId);
+              console.log(password);
               axios
-                .post("http://localhost:8080/users/signin", {
-                  params: {
+                .post("http://localhost:8080/users", 
+                {
+                  
                     userId: userId,
                     password: password,
-                  },
-                })
+                }
+                  ,
+                  {
+                    headers: {
+                      "Content-type": "application/json",
+                      Accept: "application/json",
+                    },
+                  }
+                )
                 .then((res) => {
                   console.log(res);
                   localStorage.setItem("userId", userId);
