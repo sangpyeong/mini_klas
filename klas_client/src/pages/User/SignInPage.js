@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useRef } from "react";
+import { ImBubbles3 } from "react-icons/im";
 
 function SignInPage({ modal, setModal }) {
   const [password, setPaaword] = useState("");
@@ -38,8 +39,8 @@ function SignInPage({ modal, setModal }) {
                 .then((res) => {
                   console.log(res);
                   localStorage.setItem("userId", userId);
-                  localStorage.setItem("userType", type);
-                  setUserType(type);
+                  localStorage.setItem("userType", res.data.type);
+                  setUserType(res.data.type);
                 })
                 .catch((err) => {
                   console.log(err.response);
@@ -62,12 +63,15 @@ function SignInPage({ modal, setModal }) {
             }}
           />
         </Link>
-        <Button
-          text="카카오"
+        <button
           onClick={() => {
             setModal(true);
           }}
-        />
+          class="w-[100px] border-[3px] rounded-[7px] h-[30px] bg-yellow-200 items-center flex justify-center text-center transition-all duration-200 hover:bg-slate-300"
+        >
+          <ImBubbles3 />
+          카카오
+        </button>
       </div>
     </div>
   );
