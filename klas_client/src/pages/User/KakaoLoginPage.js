@@ -9,6 +9,7 @@ import { GiCancel } from "react-icons/gi";
 
 function KakaoLoginPage({ setModal }) {
   const { userId, setUserId } = useContext(UserContext);
+  
   console.log(userId);
   return (
     <div className="flex flex-col justify-center text-[15px] items-center h-full w-full bg-yellow-200 ">
@@ -31,6 +32,9 @@ function KakaoLoginPage({ setModal }) {
       <Link
         to="https://kauth.kakao.com/oauth/authorize?client_id=2ab2ae3d4a5108ea9081265e2802998b&redirect_uri=http://localhost:3000/users/callback&response_type=code"
         className="pt-5"
+        onClick={() => {
+          localStorage.setItem("userId", userId);
+        }}
       >
         <Button text="로그인" />
       </Link>
