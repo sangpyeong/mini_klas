@@ -71,16 +71,17 @@ function SignInPage() {
           </div>
         </form>
 
-        <Link to="/home">
-          <Button
-            text="test"
-            onClick={() => {
-              setUserType(1);
-              setUserId(2018202086);
-              localStorage.setItem("userType", 1);
-              localStorage.setItem("userId", 2018202086);
-            }}
-          />
+        <Link
+          to="/home"
+          onClick={() => {
+            console.log("test");
+            setUserType(2);
+            setUserId(2018202000);
+            localStorage.setItem("userType", 2);
+            localStorage.setItem("userId", 2018202000);
+          }}
+        >
+          <Button text="test" />
         </Link>
         <button
           onClick={() => {

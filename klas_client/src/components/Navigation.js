@@ -85,7 +85,12 @@ function Navigation() {
               >
                 강의계획서
               </Link>
-              <div>출석체크</div>
+              <Link
+                to="/users/attendance"
+                class="rounded-[10px] hover:bg-slate-100"
+              >
+                출석체크
+              </Link>
               <Link to="/users/grade" class="rounded-[10px] hover:bg-slate-100">
                 성적
               </Link>

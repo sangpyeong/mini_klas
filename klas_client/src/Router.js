@@ -9,14 +9,14 @@ import { UserContext } from "./contexts/UserContext";
 import { useContext } from "react";
 import LecturePlanDetailPage from "./pages/LecturePlan/LecturePlanDetailPage";
 import LecturePlanListPage from "./pages/LecturePlan/LecturePlanListPage";
-import GradePage from "./pages/User/GradePage";
+import GradePage from "./pages/User/StudentGradePage";
 import Modal from "./components/Modal";
 import CallbackPage from "./pages/User/CallbackPage";
 import RegisterPage from "./pages/Register/RegisterPage";
 import MyPage from "./pages/My/MyPage";
 import BoardPage from "./pages/Board/BoardPage";
 import { ModalContext } from "./contexts/ModalContext";
-
+import AttendancePage from "./pages/User/AttendancePage";
 function Router() {
   const { userType, setUserType } = useContext(UserContext); //0은 비회원 1은 학생 2는 교수 3은 관리자
   const { modal, setModal } = useContext(ModalContext);
@@ -41,6 +41,7 @@ function Router() {
             />
             <Route path="signup" element={<SignUpPage />} />
             <Route path="callback" element={<CallbackPage />} />
+            <Route path="attendance" element={<AttendancePage />} />
           </Route>
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/my" element={<MyPage />} />

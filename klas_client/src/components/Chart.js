@@ -6,7 +6,7 @@ function Chart({ data }) {
     <div className="inline-block h-[100%] w-[90%]">
       <ApexCharts
         type="line"
-        series={[{ name: "평균 평점", data: data }]}
+        series={[{ data: data }]}
         options={{
           xaxis: {
             categories: [
@@ -19,9 +19,6 @@ function Chart({ data }) {
               "4-1",
               "4-2",
             ],
-            title: {
-              text: "평균평점",
-            },
           },
           yaxis: {
             min: 0,
