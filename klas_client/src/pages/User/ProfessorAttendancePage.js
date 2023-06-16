@@ -6,125 +6,50 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { useState } from "react";
 import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 function ProfessorAttendancePage() {
   const header = ["주차", "1", "2"];
-  const { userId } = useContext(UserContext);
-  const [attendance, setAttendance] = useState([]);
   const [student, setStudent] = useState();
-  const [studentList, setStudentList] = useState(["홍길동", "이길동"]);
   const [lecture, setLecture] = useState();
-  const [lectureList, setLectureList] = useState([
-    "소프트웨어공학",
-    "운영체제",
-  ]);
+
   const [data, setData] = useState([
-    {
-      studentName: "홍길동",
-      lectureName: "소프트웨어공학",
-      attendance: [
-        ["O", "X"],
-        ["O", "O"],
-        ["O", "O"],
-        ["O", "O"],
-        ["O", "O"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "O"],
-        ["O", "O"],
-        ["O", "O"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-      ],
-    },
-    {
-      studentName: "홍길동",
-      lectureName: "운영체제",
-      attendance: [
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "O"],
-        ["O", "O"],
-        ["O", "O"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "O"],
-        ["O", "O"],
-        ["O", "O"],
-        ["O", "O"],
-      ],
-    },
-    {
-      studentName: "이길동",
-      lectureName: "운영체제",
-      attendance: [
-        ["O", "O"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "O"],
-        ["O", "O"],
-        ["X", "O"],
-        ["O", "O"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "X"],
-        ["O", "O"],
-        ["O", "O"],
-      ],
-    },
+    [1, 0, 0],
+    [2, 0, 0],
+    [3, 0, 0],
+    [4, 0, 0],
+    [5, 0, 0],
+    [6, 0, 0],
+    [7, 0, 0],
+    [8, 0, 0],
+    [9, 0, 0],
+    [10, 0, 0],
+    [11, 0, 0],
+    [12, 0, 0],
+    [13, 0, 0],
+    [14, 0, 0],
+    [15, 0, 0],
   ]);
-  useEffect(() => {
+
+  const handleAttendance = () => {
     axios
-      .post("http://localhost:8080/users/attendance", {
-        user: { userId: userId },
+      .post("http://localhost:8080/attendance", {
+        lectureName: lecture,
+        studentName: student,
+        attendance: data,
       })
       .then((res) => {
         console.log(res.data);
-        setData(res.data);
-        let SList = [];
-        res.data.map((e) => SList.push(e.studentName));
-        let LList = [];
-        res.data.map((e) => LList.push(e.lectureList));
-        const resultSL = [...new Set(SList)];
-        const resultLL = [...new Set(LList)];
-        setStudentList(resultSL);
-        setLectureList(resultLL);
+        alert("출석체크에 성공하였습니다.");
       })
       .catch((err) => {
         console.log(err.response);
+        alert("출석체크에 실패하였습니다.");
       });
-  }, []);
 
-  const handleAttendance = () => {
     const foundObj = data.find((obj) => {
       return obj.studentName === student && obj.lectureName === lecture;
     });
-
-    if (foundObj) {
-      console.log(foundObj);
-    } else {
-      console.log("일치하는 객체를 찾을 수 없습니다.");
-    }
-
-    const targetList = foundObj.attendance;
-    // 주차 정보 배열 생성
-    const weeks = Array.from(
-      { length: targetList.length },
-      (_, index) => `${index + 1}주차`
-    );
-    // 1열에 주차 정보 추가
-    const result = targetList.map((row, index) => [weeks[index], ...row]);
-    setAttendance(result);
   };
   return (
     <div className="flex flex-col justify-start items-center  h-screen bg-gradient-to-b from-white to-[#C8D6E8] ">
@@ -132,33 +57,95 @@ function ProfessorAttendancePage() {
         <div className="flex text-[25px] mt-[3%] w-[100%] h-[5%] border-[2px] items-center bg-white rounded-[10px]">
           <div className="ml-4">출석체크 입력</div>
         </div>
-        <select
-          className="border-[2px]"
-          name="student"
-          onChange={(e) => {
-            setStudent(e.target.value);
-          }}
-        >
-          <option value="">학생을 선택해주세요</option>
-          {studentList.map((e) => (
-            <option value={e}>{e}</option>
-          ))}
-        </select>
-        <select
-          className="border-[2px]"
-          name="lecture"
-          onChange={(e) => {
-            setLecture(e.target.value);
-          }}
-        >
-          <option value="">강의를 선택해주세요</option>
-          {lectureList.map((e) => (
-            <option value={e}>{e}</option>
-          ))}
-        </select>
-        <Button text={"선택 완료"} onClick={handleAttendance} />
+        <div className="flex  w-full pl-4 justify-start ">
+          <Input
+            type="text"
+            onChange={setLecture}
+            placeholder="강의명을 입력해주세요"
+          />
+          <Input
+            type="text"
+            onChange={setStudent}
+            placeholder="학생명을 입력해주세요"
+          />
+        </div>
+
         <div className="inline-block h-[80%] ">
-          <Table header={header} data={attendance} />
+          <table
+            className="border-collapse border rounded-lg shadow-md h-full w-full bg-white"
+            style={{ tableLayout: "fixed" }}
+          >
+            <thead>
+              <tr>
+                {header.map((text, index) => (
+                  <th
+                    key={index}
+                    className="border bg-gray-200  text-center font-medium text-gray-700"
+                  >
+                    {text}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((row, rowIndex) => (
+                <tr key={rowIndex}>
+                  {row.map((cell, cellIndex) => (
+                    <td
+                      key={cellIndex}
+                      className="border  text-center text-gray-700"
+                    >
+                      {cellIndex === 0 ? (
+                        <div>{rowIndex + 1}</div>
+                      ) : (
+                        <div>
+                          <label>결석</label>
+                          <input
+                            name={`${rowIndex}${cellIndex}`}
+                            type="radio"
+                            value="option1"
+                            onClick={() => {
+                              const tmpData = data;
+                              console.log(tmpData);
+                              tmpData[rowIndex][cellIndex] = 0;
+                              setData(tmpData);
+                            }}
+                          />
+                          <label>출석</label>
+                          <input
+                            name={`${rowIndex}${cellIndex}`}
+                            value="option2"
+                            type="radio"
+                            onClick={() => {
+                              const tmpData = data;
+                              console.log(tmpData);
+                              tmpData[rowIndex][cellIndex] = 1;
+                              setData(tmpData);
+                            }}
+                          />
+                          <label>지각</label>
+                          <input
+                            name={`${rowIndex}${cellIndex}`}
+                            value="option3"
+                            type="radio"
+                            onClick={() => {
+                              const tmpData = data;
+                              console.log(tmpData);
+                              tmpData[rowIndex][cellIndex] = 2;
+                              setData(tmpData);
+                            }}
+                          />
+                        </div>
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="flex w-full justify-end pr-4">
+          <Button text={"선택 완료"} onClick={handleAttendance} />
         </div>
       </div>
     </div>

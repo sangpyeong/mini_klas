@@ -54,7 +54,7 @@ function StudentAttendancePage() {
   ]);
   useEffect(() => {
     axios
-      .post("http://localhost:8080/users/attendance", {
+      .get("http://localhost:8080/attendance", {
         user: { userId: userId },
       })
       .then((res) => {
