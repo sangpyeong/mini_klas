@@ -51,7 +51,7 @@ function BoardUpdatePage() {
             axios
               .post("http://localhost:8080/board/update", {
                 user: { userId: userId },
-                boardId: boardId,
+                id: boardId,
                 title: title,
                 content: content,
               })

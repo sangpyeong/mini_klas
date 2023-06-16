@@ -30,7 +30,7 @@ function BoardDetailPage() {
   useEffect(() => {
     axios
       .post("http://localhost:8080/board/detail", {
-        boardId: boardId,
+        id: boardId,
       })
       .then((res) => {
         console.log(res);
@@ -86,7 +86,7 @@ function BoardDetailPage() {
               onClick={() => {
                 axios
                   .post("http://localhost:8080/board/delete", {
-                    boardId: boardId,
+                    id: boardId,
                   })
                   .then((res) => {
                     setModal(false);

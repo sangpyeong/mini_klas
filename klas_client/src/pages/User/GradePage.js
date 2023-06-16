@@ -3,6 +3,7 @@ import Table from "../../components/Table";
 import axios from "axios";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
+import Chart from "../../components/Chart";
 
 function GradePage() {
   const [grades, setGrades] = useState([
@@ -97,6 +98,7 @@ function GradePage() {
       ],
     },
   ]);
+  let data = [4.1, 3.5, 4.5];
   const { userId } = useContext(UserContext);
   useEffect(() => {
     axios
@@ -112,8 +114,12 @@ function GradePage() {
         }
       )
       .then((res) => {
-        console.log(res);
-        setGrades(res);
+        data = [];
+        console.log(res.data);
+        setGrades(res.data);
+        for (let i = 0; i < res.data.length; i++) {
+          data.push(res.data[i].grade);
+        }
       })
       .catch((err) => {
         console.log(err.response);
@@ -124,6 +130,12 @@ function GradePage() {
     <div class="flex flex-col justify-start items-center  h-screen bg-gradient-to-b from-white to-[#C8D6E8] overflow-y-auto">
       <div class="flex flex-row mt-[3%] border-collapse h-[100vh] w-[60%] overflow-y-auto ">
         <div className=" inline-block justify-evenly overflow-y-auto">
+          <div className="flex justify-center items-center font-bold text-[20px]">
+            평균 평점
+          </div>
+          <div className="flex justify-center h-[30%] w-full">
+            <Chart data={data} />
+          </div>
           {grades.map((grade) => (
             <div className="flex flex-col h-[40%] w-full justify-center items-center">
               <div className="pt-5">{grade.semester}</div>
