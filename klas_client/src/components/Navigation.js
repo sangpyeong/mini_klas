@@ -91,9 +91,24 @@ function Navigation() {
               </Link>
             </div>
             <div class="flex flex-col w-[20%] justify-center ">
-              <div>공지</div>
-              <div>자료실</div>
-              <div>과제</div>
+              <Link
+                to="/lecture/notice/list"
+                class="rounded-[10px] hover:bg-slate-100"
+              >
+                공지
+              </Link>
+              <Link
+                to="/lecture/material/list"
+                class="rounded-[10px] hover:bg-slate-100"
+              >
+                자료실
+              </Link>
+              <Link
+                to="/lecture/assignment/list"
+                class="rounded-[10px] hover:bg-slate-100"
+              >
+                과제
+              </Link>
             </div>
             <div class="flex flex-col w-[20%] justify-center "></div>
           </div>
