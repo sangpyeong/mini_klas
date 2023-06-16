@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function LecturePlanListPage() {
   const data = [
     { id: 1, title: "전체" },
     { id: 2, title: "수강과목" },
   ];
-
+  const navigate = useNavigate();
   // 체크된 아이템을 담을 배열
   const [checkItems, setCheckItems] = useState([]);
 
@@ -75,13 +76,24 @@ function LecturePlanListPage() {
       setOutput(emptyarray);
     }
   };
+
   const [output, setOutput] = useState([]);
+
   console.log(output); //디버깅
   const listitem = (lecturelist) => {
     const result = [];
     for (let i = 0; i < lecturelist.length; i++) {
       result.push(
-        <button class="flex flex-row justify-center " onClick={() => {}}>
+        <button
+          class="flex flex-row justify-center w-full "
+          onClick={() => {
+            navigate("/lecture/plan/detail", {
+              state: {
+                lectureid: lecturelist[i].id,
+              },
+            });
+          }}
+        >
           <div class="border border-black w-full">
             {lecturelist[i].lecturename}
           </div>
@@ -102,17 +114,19 @@ function LecturePlanListPage() {
   };
 
   return (
-    <div class="flex flex-col justify-center items-center h-screen  bg-gradient-to-b from-white to-[#C8D6E8]">
-      <div class="flex justify-center flex-col items-center h-[70%] w-[70%] ">
-        <div class="flex justify-start w-full  mb-4">강의계획서 조회</div>
+    <div class="flex flex-col justify-center items-center h-screen border bg-gradient-to-b from-white to-[#C8D6E8]">
+      <div class="flex justify-center flex-col items-center h-[600px] w-[1400px] border border-black ">
+        <div class="flex justify-start  w-[90%] h-[10%] mt-4 text-[35px]">
+          강의계획서 조회
+        </div>
 
         <form
           onSubmit={handleSubmit}
-          class="flex flex-row justify-center w-full  mb-4"
+          class="flex flex-row justify-center w-[90%] h-[10%]  mt-4 mb-4"
         >
-          <div class="flex flex-col">
+          <div class="flex flex-col ">
             <div class="flex flex-row  ">
-              <div class=" border border-black w-full">
+              <div class=" border border-black w-full h-[30px]">
                 과목명&nbsp;&nbsp;&nbsp;
               </div>
               <input
@@ -123,7 +137,7 @@ function LecturePlanListPage() {
               />
             </div>
             <div class="flex flex-row">
-              <div class="border border-black w-full">담당교수</div>
+              <div class="border border-black w-full h-[30px]">담당교수</div>
               <input
                 class=" border border-black"
                 type="text"
@@ -132,7 +146,7 @@ function LecturePlanListPage() {
               />
             </div>
           </div>
-          <div class="flex justify-center items-center border border-black ">
+          <div class="flex justify-center items-center border border-black  ">
             수강여부
           </div>
 
@@ -164,28 +178,25 @@ function LecturePlanListPage() {
           />
         </form>
 
-        <div class="flex flex-col justify-center w-full   ">
-          <div class="flex flex-row justify-center border border-black">
-            <div class="border border-black w-full">과목명</div>
+        <div class="flex flex-row justify-center border w-[90%] border-black ">
+          <div class="border border-black w-full ">과목명</div>
 
-            <div class="border border-black w-full">학점/시간</div>
+          <div class="border border-black w-full ">학점/시간</div>
 
-            <div class="border border-black w-full">교수명</div>
+          <div class="border border-black w-full ">교수명</div>
 
-            <div class="border border-black w-full">연락처</div>
-          </div>
-          <div class="flex w-full justify-center border border-black">
-            {output.length === 0 ? (
-              <div className="flex flex-row justify-center ">
-                검색결과가 없습니다.
-              </div>
-            ) : (
-              <div className="flex flex-col justify-center w-full ">
-                {listitem(output)}
-              </div>
-            )}
-          </div>
+          <div class="border border-black w-full ">연락처</div>
         </div>
+
+        {output.length === 0 ? (
+          <div class="flex flex-row justify-center w-[90%] h-[60%] border border-black  ">
+            검색결과가 없습니다.
+          </div>
+        ) : (
+          <div class="flex flex-col  w-[90%] h-[60%] border border-black     ">
+            <div class="overflow-y-auto w-full">{listitem(output)}</div>
+          </div>
+        )}
       </div>
     </div>
   );
